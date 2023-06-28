@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Total price</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+h1
+{
+    text-align: center;
+}
+        
+.myDiv 
+{
+  border: 2px outset red;
+  background-color: lightblue;    
+  text-align: center;
+}
+        
+ .button 
+{
+  background-color: #BDB76B;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+	
+</head>
+<body>
+   <h1>Ár</h1>
+   <div style="text-align:center">
+   <input type="button" class="button" onclick="setTimeout(myFunction, 3000);" value="Total price">
+    </div>
+   <div  id="price">
+   <button>Total Price</button>
+  </div>
+    
+
+     <script>
+
+        function NewCategory()
+        {
+            var url = "http://localhost/rest-api-php-otthon/orders/totalprice";
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function()
+            {
+                if(this.readyState == 4)
+                {
+                    
+                    var response = JSON.parse(this.responseText);
+                    
+
+                    var sum = response.TotalPrice;
+
+                   
+                   document.getElementById("price").innerHTML = "<br>" + "<div class='myDiv'>" + "<h2>" + sum + " forint" + "</h2>" + "</div>";
+                
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+        
+         
+        document.querySelector("button").onclick = NewCategory;
+        NewCategory()
+         
+
+    </script>
+    
+    <script>
+        var products = document.getElementById("price");
+        price.style.display = "none";
+        
+        function myFunction() 
+        {
+        var x = document.getElementById("price");
+        if (x.style.display === "none")
+        {
+        x.style.display = "block";
+        } 
+        else 
+        {
+        x.style.display = "none";
+        }
+        }
+        
+    </script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+    body
+    {
+    background-color: antiquewhite;
+    }
+    </style>
+	
+</head>
+<body>
+   <h1>Kategóriák</h1>
+   <br>
+   <input type="button" onclick="myFunction()" value="Toggle categories">
+   <div  id="categories">
+   <button>Categories</button>
+   </div>
+    
+
+     <script>
+
+        function NewCategory()
+        {
+            var url = "http://localhost/rest-api-php-otthon/categories";
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function()
+            {
+                if(this.readyState == 4)
+                {
+                    
+                  var response = JSON.parse(this.responseText);
+                    
+                  var text = "";
+                    
+                    for(var i=0; i<response.length; i++)
+                        {
+                            text += "<div><br><br>" + "<strong>Név: </strong>" + response[i].name + "<br>" + "<strong>Leírás: </strong>" + response[i].description + "</div>" + "<br>";
+                        }
+                   
+                   document.getElementById("categories").innerHTML = text;
+                
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+        
+         
+        document.querySelector("button").onclick = NewCategory;
+        NewCategory()
+         
+
+    </script>
+    
+    <script>
+    function myFunction() 
+    {
+    var x = document.getElementById("categories");
+    if (x.style.display === "none")
+    {
+    x.style.display = "block";
+    } 
+    else 
+    {
+    x.style.display = "none";
+    }
+    }
+    </script>
+    
+    
+</body>
+</html>
